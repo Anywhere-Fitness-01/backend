@@ -23,7 +23,9 @@ const restricted = (req, res, next) => {
         }
 }
 
+// WHY WON'T THIS WORK?!?!?!
 const checkRole = (req, res, next) => {
+    const { role } = req.body
     if (req.decodedJwt.role === 'instructor') {
         next()
     } else {

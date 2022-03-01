@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', restricted, async (req, res, next) => {
     try {
         const createClass = await Class.add(req.body)
         res.status(201).json(createClass)
@@ -23,7 +23,8 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:class_id', async (req, res, next) => {
+// checkRole mw not working
+router.put('/:class_id', restricted, checkRole, async (req, res, next) => {
     const { class_id } = req.params
         try {
             const updateClass = await Class.update(class_id, req.body)
@@ -34,7 +35,13 @@ router.put('/:class_id', async (req, res, next) => {
 })
 
 router.delete('/:class_id', async (req, res, next) => {
-
+    const { class_id } = req.params
+        try {
+            const removeClass = await Class.remove(class_id)
+            res.json(removeClass)
+        } catch (err) {
+            next(err)
+        }
 })
 
 module.exports = router

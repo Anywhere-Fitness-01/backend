@@ -5,14 +5,11 @@ function findClass() {
 }
 
 function findBy(filter) {
-    return db('classes')
-        .where(filter)
+    return db('classes').where(filter).first()
 }
 
-function findById(class_id) {
-    return db('classes')
-        .where('class_id', class_id)
-        .first()
+function findById(id) {
+    return db('classes').where('class_id', id).first()
 }
 
 async function add(newClass) {
@@ -20,18 +17,15 @@ async function add(newClass) {
     return class_id
 }
 
-async function update(class_id, classes) {
+async function update(id, updateClass) {
     await db('classes')
-        .where('class_id', class_id)
-        .update(classes)
-    return findById(class_id)
+        .where('class_id', id)
+        .update(updateClass)
+    return findById(id)
 }
 
-function remove(class_id) {
-    return db('classes')
-        .where('class_id', class_id)
-        .first()
-        .del()
+function remove(id) {
+    return db('classes').where('class_id', id).first().del()
 }
 
 module.exports = {
