@@ -1,6 +1,7 @@
 exports.up = async (knex) => {
   await knex.schema
-      .createTable('classes', classes => {
+      .createTable('classes', (classes) => {
+          classes.increments('class_id')
           classes.string('class_name', 200)
               .notNullable()
               .unique()

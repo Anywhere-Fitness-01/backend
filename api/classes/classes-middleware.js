@@ -23,4 +23,18 @@ const restricted = (req, res, next) => {
         }
 }
 
-module.exports = restricted
+const checkRole = (req, res, next) => {
+    if (req.decodedJwt.role === 'instructor') {
+        next()
+    } else {
+        next({
+            status: 401,
+            message: 'Only instructors are able to access this'
+        })
+    }
+}
+
+module.exports = {
+    restricted,
+    checkRole
+}

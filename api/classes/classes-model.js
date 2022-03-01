@@ -16,7 +16,7 @@ function findById(class_id) {
 }
 
 async function add(newClass) {
-    const [class_id] = await db('classes').insert(['class_id', 'class_name', 'class_type', 'start_time', 'class_duration', 'intensity_level', 'location', 'registered_number', 'registered_max'])
+    const [class_id] = await db('classes').insert(newClass, ['class_id', 'class_name', 'class_type', 'start_time', 'class_duration', 'intensity_level', 'location', 'registered_number', 'registered_max'])
     return class_id
 }
 
