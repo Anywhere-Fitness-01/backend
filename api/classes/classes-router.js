@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {
     restricted,
+    validateClassId,
     checkRole
 } = require('./classes-middleware')
 const Classes = require('./classes-model')
@@ -23,7 +24,7 @@ router.post('/', restricted, checkRole, async (req, res, next) => {
     }
 })
 
-router.put('/:class_id', restricted, checkRole, async (req, res, next) => {
+router.put('/:class_id', restricted, validateClassId, checkRole, async (req, res, next) => {
     const { class_id } = req.params
         try {
             const updateClass = await Classes.update(class_id, req.body)
@@ -33,7 +34,7 @@ router.put('/:class_id', restricted, checkRole, async (req, res, next) => {
         }
 })
 
-router.delete('/:class_id', async (req, res, next) => {
+router.delete('/:class_id', validateClassId, async (req, res, next) => {
     const { class_id } = req.params
         try {
             const removeClass = await Classes.remove(class_id)
