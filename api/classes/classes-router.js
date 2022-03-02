@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.post('/', restricted, async (req, res, next) => {
+router.post('/', restricted, checkRole, async (req, res, next) => {
     try {
         const createClass = await Classes.add(req.body)
         res.status(201).json(createClass)
