@@ -23,7 +23,7 @@ Classes
 | GET    | /api/classes           | Returns an array of classes                                                                                                                                                                                                                                                     |
 | POST   | /api/classes           | Need to have a token to access this endpoint. Also need to be an `instructor` to add a class. Creates a new class sending `class_name`, `class_type`, `start_time`, `class_duration`, `intensity_level`, `location`, `registered_number`, and `registered_max` into `req.body`. |
 | PUT    | /api/classes/:class_id | Need to have a token to access this endpoint. Also need to be an `instructor` to update a class. Updates the class with the specified `class_id` using data from the `request body`. If no `class_id`, returns the message: "Class not found". Returns the modified class.      |
-| DELETE | /api/classes/:class_id | Removes the class with the specified `class_id`.                                                                                                                                                                                                                                |
+| DELETE | /api/classes/:class_id | Need to have a token to access this endpoint. Also need to be an `instructor` to remove a class. Removes the class with the specified `class_id`. If no `class_id`, returns the message: "Class not found".                                                                     |
 
 ###Meet me!
 
