@@ -3,11 +3,11 @@ const {
     restricted,
     checkRole
 } = require('./classes-middleware')
-const Class = require('./classes-model')
+const Classes = require('./classes-model')
 
 router.get('/', async (req, res, next) => {
     try {
-        const getClasses = await Class.findClass()
+        const getClasses = await Classes.findClass()
         res.json(getClasses)
     } catch (err) {
         next(err)
@@ -16,19 +16,18 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', restricted, async (req, res, next) => {
     try {
-        const createClass = await Class.add(req.body)
+        const createClass = await Classes.add(req.body)
         res.status(201).json(createClass)
     } catch (err) {
         next(err)
     }
 })
 
-// checkRole mw not working
 router.put('/:class_id', restricted, checkRole, async (req, res, next) => {
     const { class_id } = req.params
         try {
-            const updateClass = await Class.update(class_id, req.body)
-            res.status(201).json(updateClass)
+            const updateClass = await Classes.update(class_id, req.body)
+            res.json(updateClass)
         } catch (err) {
             next(err)
         }
@@ -37,7 +36,7 @@ router.put('/:class_id', restricted, checkRole, async (req, res, next) => {
 router.delete('/:class_id', async (req, res, next) => {
     const { class_id } = req.params
         try {
-            const removeClass = await Class.remove(class_id)
+            const removeClass = await Classes.remove(class_id)
             res.json(removeClass)
         } catch (err) {
             next(err)
